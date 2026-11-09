@@ -221,11 +221,11 @@ export async function createApplication(options = {}) {
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('Referrer-Policy', 'no-referrer');
     res.setHeader('X-Frame-Options', 'DENY');
-    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' https://memeprod.sgp1.digitaloceanspaces.com https://yuenhk.github.io; connect-src 'self' https://yuenhk.github.io; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'");
+    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' https://memeprod.sgp1.digitaloceanspaces.com https://wcy.hk; connect-src 'self' https://wcy.hk; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'");
     try {
       const url = new URL(req.url, 'http://localhost');
       const path = decodeURIComponent(url.pathname);
-      if(path==='/theme-preview.html'){res.setHeader('X-Frame-Options','SAMEORIGIN');res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' https://memeprod.sgp1.digitaloceanspaces.com https://yuenhk.github.io; connect-src 'self' https://yuenhk.github.io; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'none'");}
+      if(path==='/theme-preview.html'){res.setHeader('X-Frame-Options','SAMEORIGIN');res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' https://memeprod.sgp1.digitaloceanspaces.com https://wcy.hk; connect-src 'self' https://wcy.hk; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'none'");}
       const method = req.method;
       const publicPlay = path.startsWith('/api/play/');
       const allowedPlayOrigin = req.headers.origin && [appOrigin, publicAppOrigin].filter(Boolean).includes(req.headers.origin);

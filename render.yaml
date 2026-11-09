@@ -16,6 +16,6 @@ services:
       - key: NODE_ENV
         value: production
       - key: PUBLIC_APP_ORIGIN
-        value: https://yuenhk.github.io
+        value: https://wcy.hk
       - key: DATABASE_URL
         sync: false

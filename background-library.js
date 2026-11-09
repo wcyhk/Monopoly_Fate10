@@ -1,7 +1,7 @@
 import {loadMediaPolicy,filterThemeMedia} from './media-policy.js?v=2.6.18';
 import {SCHOOL_VIDEO_ASSETS} from './themes.js?v=2.6.18';
 // One public manifest is shared by Pages and Render; no teacher data or credentials leave the app.
-export const LIBRARY_BASE = 'https://yuenhk.github.io/Monopoly_Fate10/theme-media/';
+export const LIBRARY_BASE = 'https://wcy.hk/Monopoly_Fate10/theme-media/';
 export const LIBRARY_URL = LIBRARY_BASE + 'library.json';
 const files = {cat:['cat-play.mp4','cat-sleep.mp4','cat-ball.mp4'],dog:['dog-play.mp4','dog-sleep.mp4','dog-outdoor.mp4']};
 export function validateLibrary(data) {
