@@ -27,7 +27,7 @@ async function postgresAdapter() {
 for (const backend of ['SQLite','PostgreSQL']) {
   test(`${backend}: classroom workflow, authorization and persistence`, async t => {
     const dataDir=await mkdtemp(join(tmpdir(),'monopoly-test-'));
-    const publicOrigin='https://yuenhk.github.io';
+    const publicOrigin='https://wcy.hk';
     const app=await createApplication({dataDir,setupCode:'test-setup',publicOrigin,...(backend==='PostgreSQL'?{database:await postgresAdapter()}:{})});
     app.server.listen(0,'127.0.0.1');await once(app.server,'listening');
     const origin='http://127.0.0.1:'+app.server.address().port;let cookie='';

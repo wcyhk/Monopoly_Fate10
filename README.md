@@ -4,7 +4,7 @@
 
 ## 立即使用
 
-- **[抽籤前台](https://yuenhk.github.io/Monopoly_Fate10/)**：毋須登入，選擇班別後即可擲骰子或快速抽籤。
+- **[抽籤前台](https://wcy.hk/Monopoly_Fate10/)**：毋須登入，選擇班別後即可擲骰子或快速抽籤。
 - **[教師管理後台](https://monopoly-fate-classroom.onrender.com/admin.html)**：登入後管理班別、名單、統計、頭像、主題影音及機會／命運。
 - **學生頭像提交**：使用教師提供的個人連結，不需要教師密碼。
 

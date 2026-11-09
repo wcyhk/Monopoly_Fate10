@@ -150,7 +150,7 @@
       ],
       "asset": "school-sounds/meme-ba-dum-tss.mp3",
       "sha256": "ca83d064b4e67c8268c4929788562785b99ce5557d7ed6a5842a586e863f0953",
-      "source": "https://github.com/YuenHK/Monopoly_Fate10/blob/main/scripts/build-meme-drum.py",
+      "source": "https://github.com/wcyhk/Monopoly_Fate10/blob/main/scripts/build-meme-drum.py",
       "author": "Monopoly Fate10 project",
       "license": "https://creativecommons.org/publicdomain/zero/1.0/",
       "caption": "原創重現常用笑話鼓點：兩下鼓聲加鈸聲；沒有語言或外部採樣。",

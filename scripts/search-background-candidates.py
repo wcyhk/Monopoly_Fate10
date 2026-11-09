@@ -8,7 +8,7 @@ def search():
  results=[]
  for query in ['filetype:video intitle:kitten playing','filetype:video intitle:puppy playing']:
   params={'action':'query','format':'json','generator':'search','gsrsearch':query,'gsrnamespace':6,'gsrlimit':10,'prop':'imageinfo','iiprop':'extmetadata','iiextmetadatafilter':'LicenseShortName|LicenseUrl'}
-  with urlopen(Request(API+'?'+urlencode(params),headers={'User-Agent':'MonopolyFate10-school-candidates/2.6.4 (https://github.com/YuenHK/Monopoly_Fate10)'}),timeout=20) as response:
+  with urlopen(Request(API+'?'+urlencode(params),headers={'User-Agent':'MonopolyFate10-school-candidates/2.6.4 (https://github.com/wcyhk/Monopoly_Fate10)'}),timeout=20) as response:
    raw=response.read(1024*1024+1)
   if len(raw)>1024*1024:raise ValueError('Candidate response too large')
   data=json.loads(raw)
