@@ -63,7 +63,7 @@ test('phone perimeter fits portrait and landscape without dropping any cells',()
 });
 
 test('iPad viewport layouts retain all cells and usable center space in both orientations',()=>{
- for(const [width,height] of [[796,1118],[1140,766],[744,960],[984,1316],[1326,974],[720,620]]){
+ for(const [width,height] of [[796,1118],[1140,766],[744,960],[984,1316],[1326,974],[1336,982],[720,620]]){
   for(const cellCount of [22,48,52,60,68]){
    const {columns,rows,cellWidth,cellHeight}=tabletBoardLayout({cellCount,width,height});
    assert.equal(2*(columns+rows)-4,cellCount);

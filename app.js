@@ -152,7 +152,7 @@ function updateBoardViewport(){
  const container=$('board-container'),width=document.documentElement.clientWidth;
  const viewportHeight=window.visualViewport?.height||innerHeight;
  const phone=width<=600||(width<=1024&&viewportHeight<=600);
- const tablet=!phone&&width<=1366;
+ const tablet=!phone&&(width<=1366||navigator.maxTouchPoints>1);
  document.body.classList.toggle('phone-board-fit',phone);
  container.classList.toggle('phone-fit',phone);
  container.classList.toggle('tablet-fit',tablet);
