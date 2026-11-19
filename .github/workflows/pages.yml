@@ -1,5 +1,13 @@
 name: Publish classroom entry on GitHub Pages
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'app.js'
+      - 'board.css'
+      - 'index.html'
+      - 'play-performance.js'
+      - '.github/workflows/pages.yml'
   workflow_dispatch:
 permissions:
   contents: read

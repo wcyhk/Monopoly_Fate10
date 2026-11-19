@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {createReadCache,createLoadingTask,fitBoardHeight,phoneBoardLayout} from '../play-performance.js';
+import {createReadCache,createLoadingTask,fitBoardHeight,phoneBoardLayout,tabletBoardLayout} from '../play-performance.js';
 function deferred(){let resolve,reject;const promise=new Promise((a,b)=>{resolve=a;reject=b;});return {promise,resolve,reject};}
 test('concurrent sound reads share one request, cache expires, and policy revisions cannot reuse old choices',async()=>{
  let time=0,calls=0;const cache=createReadCache({ttl:60000,now:()=>time});
@@ -60,4 +60,24 @@ test('phone perimeter fits portrait and landscape without dropping any cells',()
  const portrait=phoneBoardLayout({cellCount:44,width:378,height:794});
  const landscape=phoneBoardLayout({cellCount:44,width:832,height:340});
  assert.ok(landscape.columns>portrait.columns);
+});
+
+test('iPad viewport layouts retain all cells and usable center space in both orientations',()=>{
+ for(const [width,height] of [[796,1118],[1140,766],[744,960],[984,1316],[1326,974],[1336,982],[720,620]]){
+  for(const cellCount of [22,48,52,60,68]){
+   const {columns,rows,cellWidth,cellHeight}=tabletBoardLayout({cellCount,width,height});
+   assert.equal(2*(columns+rows)-4,cellCount);
+   assert.ok(columns>=5&&rows>=4);
+   assert.ok(columns*cellWidth+(columns-1)*2+6<=width+.001);
+   assert.ok(rows*cellHeight+(rows-1)*2+6<=height+.001);
+   assert.ok((columns-2)*(cellWidth+2)-20>=180);
+   assert.ok((rows-2)*(cellHeight+2)-20>=220);
+  }
+ }
+});
+test('tablet layout adapts after the title opens or Safari reduces the visible height',()=>{
+ const full=tabletBoardLayout({cellCount:52,width:796,height:1118});
+ const reduced=tabletBoardLayout({cellCount:52,width:796,height:820});
+ assert.ok(reduced.columns>=full.columns);
+ assert.ok(reduced.cellHeight<full.cellHeight);
 });

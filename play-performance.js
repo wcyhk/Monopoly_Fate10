@@ -47,3 +47,16 @@ export function phoneBoardLayout({cellCount,width,height}){
  }
  return best||{columns:4,rows:sum-4};
 }
+
+// iPad and small-window layouts fit the full perimeter without shrinking text.
+export function tabletBoardLayout({cellCount,width,height}){
+ const sum=(cellCount+4)/2;
+ let best=null;
+ for(let columns=5;columns<=sum-4;columns++){
+  const rows=sum-columns,cellWidth=(width-6-(columns-1)*2)/columns,cellHeight=(height-6-(rows-1)*2)/rows;
+  if((columns-2)*(cellWidth+2)-20<180||(rows-2)*(cellHeight+2)-20<220)continue;
+  const score=Math.min(cellWidth/60,cellHeight/82);
+  if(!best||score>best.score)best={columns,rows,cellWidth,cellHeight,score};
+ }
+ return best||phoneBoardLayout({cellCount,width,height});
+}
