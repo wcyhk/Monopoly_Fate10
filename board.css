@@ -62,3 +62,12 @@
 .game-page #front-header .display-settings-panel{position:absolute;right:0;top:100%;z-index:45;width:min(340px,calc(100vw - 24px));max-height:calc(100dvh - 180px);overflow:auto}
 @media(max-width:1024px){.game-page #front-header .board-menu{flex-basis:100%}.game-page #front-header .board-menu>.actions{justify-content:flex-start}.game-page #front-header .board-menu>.actions>*{flex:1 1 140px}.game-page #front-header #display-settings>summary{width:100%}}
 @media(max-width:600px){.game-page #front-header{padding:12px 12px 12px 64px;gap:12px}.game-page #front-header .board-menu>.actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.game-page #front-header .board-menu>.actions>*{width:100%;min-width:0}.game-page #front-header .board-menu>.actions>select{grid-column:1/-1}.game-page #front-header #display-settings{position:static}.game-page #front-header .display-settings-panel{right:12px;top:100%;margin-top:0}}
+
+/* Tablet rows use the measured visual viewport, including Safari's visible bars. */
+.game-page #board-container.tablet-fit{min-height:0;max-height:none}
+.tablet-fit #center-area{display:flex;flex-direction:column;align-items:center;justify-content:safe center;overflow:auto;min-width:0;min-height:0}
+.tablet-fit .center-controls{position:static}
+.tablet-fit .cell{overflow:hidden}
+.tablet-fit.compact-cells .cell{padding:2px;gap:2px}
+.tablet-fit.compact-cells .cell .avatar,.tablet-fit.compact-cells .special-icon{display:none}
+.tablet-fit.name-only .cell-number{display:none}

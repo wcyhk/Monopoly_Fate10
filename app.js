@@ -1,10 +1,10 @@
-import {createReadCache,createLoadingTask,fitBoardHeight,phoneBoardLayout} from './play-performance.js?v=2.6.19';
-import {loadMediaPolicy,approvedSchoolSound,filterThemeMedia} from './media-policy.js?v=2.6.19';
+import {createReadCache,createLoadingTask,fitBoardHeight,phoneBoardLayout,tabletBoardLayout} from './play-performance.js?v=2.6.20';
+import {loadMediaPolicy,approvedSchoolSound,filterThemeMedia} from './media-policy.js?v=2.6.20';
 import { celebrate } from './celebration.js';
-import { $, playApi as api, apiOrigin, node, notice, today, options, form, avatar } from './shared.js?v=2.6.19';
-import { themeById } from './themes.js?v=2.6.19';
-import { createBackgroundPlaylist } from './background-playlist.js?v=2.6.19';
-import { withBackgroundLibrary } from './background-library.js?v=2.6.19';
+import { $, playApi as api, apiOrigin, node, notice, today, options, form, avatar } from './shared.js?v=2.6.20';
+import { themeById } from './themes.js?v=2.6.20';
+import { createBackgroundPlaylist } from './background-playlist.js?v=2.6.20';
+import { withBackgroundLibrary } from './background-library.js?v=2.6.20';
 const appPath=new URL('./',location.href).pathname;
 $('stats-link').href=apiOrigin()+'/admin.html';
 let classes=[],lesson=null,currentIndex=0,busy=false,muted=false,pending=null,soundChoices=[],renderedBoard=null;
@@ -152,21 +152,26 @@ function updateBoardViewport(){
  const container=$('board-container'),width=document.documentElement.clientWidth;
  const viewportHeight=window.visualViewport?.height||innerHeight;
  const phone=width<=600||(width<=1024&&viewportHeight<=600);
+ const tablet=!phone&&width<=1366;
  document.body.classList.toggle('phone-board-fit',phone);
  container.classList.toggle('phone-fit',phone);
+ container.classList.toggle('tablet-fit',tablet);
  const boardTop=container.getBoundingClientRect().top;
  const bottomGap=parseFloat(getComputedStyle(container.parentElement).paddingBottom)||10;
  const availableHeight=Math.floor(viewportHeight-Math.max(0,boardTop)-bottomGap);
- const columns=phone?phoneBoardLayout({cellCount:renderedBoard.cells.length,width:container.clientWidth,height:availableHeight}).columns:
+ const layout=tablet?tabletBoardLayout({cellCount:renderedBoard.cells.length,width:container.clientWidth,height:availableHeight}):null;
+ container.classList.toggle('compact-cells',tablet&&layout.cellHeight<82);
+ container.classList.toggle('name-only',tablet&&layout.cellHeight<54&&layout.cellWidth<56);
+ const columns=tablet?layout.columns:phone?phoneBoardLayout({cellCount:renderedBoard.cells.length,width:container.clientWidth,height:availableHeight}).columns:
  Math.max(5,Math.min(renderedBoard.width,Math.floor((width-(width<=1024?24:40))/78)));
  const rows=(renderedBoard.cells.length+4)/2-columns,rowHeight=width<=1024?82:72;
  container.style.gridTemplateColumns=`repeat(${columns},minmax(0,1fr))`;
  container.style.gridTemplateRows=`repeat(${rows},minmax(0,1fr))`;
  container.style.setProperty('--board-rows',rows);
  container.querySelectorAll('.cell').forEach((cell,i)=>{const[r,c]=gridPos(i,columns,rows);cell.style.gridRow=r;cell.style.gridColumn=c;});
- const height=phone?availableHeight:fitBoardHeight({viewportHeight,boardTop,rows,rowHeight,bottomGap});
+ const height=phone||tablet?availableHeight:fitBoardHeight({viewportHeight,boardTop,rows,rowHeight,bottomGap});
  container.style.setProperty('--board-fit-height',height+'px');
- container.classList.toggle('long-board',!phone&&rows*rowHeight>availableHeight);
+ container.classList.toggle('long-board',!phone&&!tablet&&rows*rowHeight>availableHeight);
 }
 window.visualViewport?.addEventListener('resize',scheduleBoardViewport);
 const boardViewportObserver=new ResizeObserver(scheduleBoardViewport);
